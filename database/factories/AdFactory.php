@@ -12,12 +12,17 @@ class AdFactory extends Factory
 
     public function definition()
     {
+        $images = [];
+        foreach (range(1, $this->faker->numberBetween(0, 3)) as $ignored) {
+            $images[] = $this->faker->imageUrl;
+        }
+
         return [
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
-            'title' => $this->faker->word(),
-            'description' => $this->faker->text(),
-            'images' => $this->faker->words(),
+            'title' => $this->faker->sentence(),
+            'description' => $this->faker->sentence(),
+            'images' => $images,
             'price' => $this->faker->randomFloat(),
         ];
     }
