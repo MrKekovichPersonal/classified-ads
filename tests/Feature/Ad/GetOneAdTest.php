@@ -14,7 +14,7 @@ it('fetches a single ad with required fields', function () {
         ->assertJson([
             'title' => 'Test Ad',
             'price' => 100,
-            'main_photo' => 'image1.jpg',
+            'main_image' => 'image1.jpg',
         ]);
 });
 
@@ -27,7 +27,7 @@ it('fetches a single ad with optional fields', function () {
         ->assertJson([
             'title' => 'Test Ad',
             'price' => 100,
-            'main_photo' => 'image1.jpg',
+            'main_image' => 'image1.jpg',
             'description' => 'Description',
             'images' => ['image1.jpg', 'image2.jpg'],
         ]);

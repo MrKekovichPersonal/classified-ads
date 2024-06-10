@@ -26,7 +26,7 @@ class AdService
     {
         $response = [
             'title' => $ad->title,
-            'main_photo' => $ad->images[0],
+            'main_image' => $ad->images[0],
             'price' => $ad->price,
         ];
 
