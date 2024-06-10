@@ -5,7 +5,6 @@ namespace App\Services;
 use App\Filters\AdFilter;
 use App\Models\Ad;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
-use Illuminate\Http\Request;
 
 class AdService
 {
@@ -16,7 +15,7 @@ class AdService
         $this->filter = $filter;
     }
 
-    public function getAds(Request $request): LengthAwarePaginator
+    public function getAds(): LengthAwarePaginator
     {
         $query = Ad::query();
         $query = $this->filter->apply($query);

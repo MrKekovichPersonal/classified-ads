@@ -16,9 +16,9 @@ class AdController extends Controller
         $this->service = $service;
     }
 
-    public function index(Request $request)
+    public function index()
     {
-        return $this->service->getAds($request);
+        return $this->service->getAds();
     }
 
     public function store(StoreAdRequest $request)
