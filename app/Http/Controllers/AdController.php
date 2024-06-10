@@ -29,6 +29,7 @@ class AdController extends Controller
 
     public function show(Ad $ad)
     {
-        return $this->service->getAd($ad);
+        $fields = explode(',', request()->input('fields'));
+        return $this->service->getAd($ad, $fields);
     }
 }
