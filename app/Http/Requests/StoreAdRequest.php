@@ -11,8 +11,8 @@ class StoreAdRequest extends FormRequest
         return [
             'title' => 'required|string|max:200',
             'description' => 'nullable|string|max:1000',
-            'photos' => 'required|array|max:3',
-            'photos.*' => 'url',
+            'images' => 'required|array|max:3',
+            'images.*' => 'url',
             'price' => 'required|numeric|min:0',
         ];
     }
