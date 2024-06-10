@@ -19,7 +19,21 @@ class AdService
     {
         $query = Ad::query();
         $query = $this->filter->apply($query);
-        return $query->paginate(10);
+
+        $query->select(['id', 'title', 'price', 'images']);
+
+        $ads = $query->paginate(10);
+
+        $ads->getCollection()->transform(function ($ad) {
+            return [
+                'id' => $ad->id,
+                'title' => $ad->title,
+                'main_image' => $ad->main_image,
+                'price' => $ad->price,
+            ];
+        });
+
+        return $ads;
     }
 
     public function getAd(Ad $ad, array $fields = null): array
