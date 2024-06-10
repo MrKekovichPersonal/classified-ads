@@ -24,4 +24,9 @@ class Ad extends Model
             'images' => 'array',
         ];
     }
+
+    public function getMainImageAttribute()
+    {
+        return $this->images[0] ?? null;
+    }
 }
