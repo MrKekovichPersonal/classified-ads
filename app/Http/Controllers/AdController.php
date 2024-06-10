@@ -4,21 +4,31 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreAdRequest;
 use App\Models\Ad;
+use App\Services\AdService;
+use Illuminate\Http\Request;
 
 class AdController extends Controller
 {
-    public function index()
+    private AdService $service;
+
+    public function __construct(AdService $service)
     {
-        return Ad::all();
+        $this->service = $service;
+    }
+
+    public function index(Request $request)
+    {
+        return $this->service->getAds($request);
     }
 
     public function store(StoreAdRequest $request)
     {
-        return Ad::create($request->validated());
+        $data = $request->validated();
+        return $this->service->createAd($data);
     }
 
     public function show(Ad $ad)
     {
-        return $ad;
+        return $this->service->getAd($ad);
     }
 }
