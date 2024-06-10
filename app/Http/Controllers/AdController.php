@@ -24,7 +24,8 @@ class AdController extends Controller
     public function store(StoreAdRequest $request)
     {
         $data = $request->validated();
-        return $this->service->createAd($data);
+        $adId = $this->service->createAd($data);
+        return response()->json(['id' => $adId], 201);
     }
 
     public function show(Ad $ad)
