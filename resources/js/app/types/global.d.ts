@@ -5,7 +5,7 @@ import { PageProps as AppPageProps } from "./index"
 
 declare global {
   interface Window {
-    axios: AxiosInstance;
+    axios: AxiosInstance
   }
 
   var route: typeof ziggyRoute
@@ -13,7 +13,7 @@ declare global {
 
 declare module "vue" {
   interface ComponentCustomProperties {
-    route: typeof ziggyRoute;
+    route: typeof ziggyRoute
   }
 }
 
