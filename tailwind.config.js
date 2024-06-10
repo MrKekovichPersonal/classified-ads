@@ -17,4 +17,8 @@ export default {
     forms,
     require('daisyui')
   ],
+
+  daisyui: {
+    themes: ["light", "dark"],
+  },
 };
