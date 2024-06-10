@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AdRequest extends FormRequest
+class StoreAdRequest extends FormRequest
 {
     public function rules()
     {
