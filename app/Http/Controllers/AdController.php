@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\AdRequest;
+use App\Http\Requests\StoreAdRequest;
 use App\Models\Ad;
 
 class AdController extends Controller
@@ -12,7 +12,7 @@ class AdController extends Controller
         return Ad::all();
     }
 
-    public function store(AdRequest $request)
+    public function store(StoreAdRequest $request)
     {
         return Ad::create($request->validated());
     }
@@ -20,19 +20,5 @@ class AdController extends Controller
     public function show(Ad $ad)
     {
         return $ad;
-    }
-
-    public function update(AdRequest $request, Ad $ad)
-    {
-        $ad->update($request->validated());
-
-        return $ad;
-    }
-
-    public function destroy(Ad $ad)
-    {
-        $ad->delete();
-
-        return response()->json();
     }
 }
