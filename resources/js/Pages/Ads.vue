@@ -1,7 +1,12 @@
 <script setup lang="ts">
 
+import Navbar from "@/shared/ui/Navbar.vue"
+import AdList from "@/widgets/Ad/AdGrid.vue"
 </script>
 
 <template>
-<h1>Hello world!</h1>
+  <Navbar/>
+  <div class="container mx-auto my-2">
+    <AdList/>
+  </div>
 </template>
