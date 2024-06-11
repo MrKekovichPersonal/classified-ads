@@ -1,12 +1,11 @@
 import { api } from "@/shared/api/instance"
 import { BackendRs } from "@/shared/types"
-import { TAd, TCreateAdRq } from "@/entities/Ad/model/types"
+import { Order, QueryParams, SortBy, TAd, TCreateAdRq } from "@/entities/Ad/model/types"
 
 export async function getAds(
-  page: number = 1,
-  sortBy: "created_at" | "price" | null = null,
-  order: "asc" | "desc" | null = null,
+  { page, sortBy, order }: QueryParams
 ): Promise<BackendRs<TAd[]>> {
+  console.log(page, sortBy, order)
   const response = await api.get("/ads", {
     params: {
       page,

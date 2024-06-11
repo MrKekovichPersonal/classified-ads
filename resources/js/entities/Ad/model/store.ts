@@ -1,5 +1,5 @@
 import { defineStore } from "pinia"
-import { TAd, TCreateAdRq } from "@/entities/Ad/model/types"
+import { Order, SortBy, TAd, TCreateAdRq } from "@/entities/Ad/model/types"
 import { createAd, getAd, getAds } from "@/entities/Ad/model/api"
 
 export const useAdStore = defineStore({
@@ -7,20 +7,20 @@ export const useAdStore = defineStore({
   state: () => ({
     ads: [] as TAd[],
     page: 1,
-    sortBy: null as "created_at" | "price" | null,
-    order: null as "asc" | "desc" | null,
+    sortBy: null as SortBy,
+    order: null as Order,
     loading: true,
     error: null as string | null,
     selectedAd: null as TAd | null,
   }),
   actions: {
     loadAds(
-      page: number = 1,
-      sortBy: "created_at" | "price" | null = null,
-      order: "asc" | "desc" | null = null,
+      page: number | null = null,
+      sortBy: SortBy = null,
+      order: Order = null,
     ) {
       this.loading = true;
-      getAds(page, sortBy, order)
+      getAds({ page, sortBy, order })
         .then((response) => {
           this.ads = response.data;
           this.loading = false;
@@ -71,7 +71,7 @@ export const useAdStore = defineStore({
       this.loadAds(page, this.sortBy, this.order);
     },
 
-    setSortBy(sortBy: "created_at" | "price" | null) {
+    setSortBy(sortBy: SortBy) {
       if (sortBy === this.sortBy) {
         return;
       }
@@ -79,7 +79,7 @@ export const useAdStore = defineStore({
       this.loadAds(this.page, sortBy, this.order);
     },
 
-    setOrder(order: "asc" | "desc" | null) {
+    setOrder(order: Order) {
       if (order === this.order) {
         return;
       }
