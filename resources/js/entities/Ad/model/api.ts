@@ -1,5 +1,5 @@
 import { api } from "@/shared/api/instance"
-import { BackendRs } from "@/app/types"
+import { BackendRs } from "@/shared/types"
 import { TAd, TCreateAdRq } from "@/entities/Ad/model/types"
 
 export async function getAllAds(
