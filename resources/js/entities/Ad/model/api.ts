@@ -2,7 +2,7 @@ import { api } from "@/shared/api/instance"
 import { BackendRs } from "@/shared/types"
 import { TAd, TCreateAdRq } from "@/entities/Ad/model/types"
 
-export async function getAllAds(
+export async function getAds(
   page: number = 1,
   sortBy: "created_at" | "price" | null = null,
   order: "asc" | "desc" | null = null,
