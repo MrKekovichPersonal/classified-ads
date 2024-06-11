@@ -2,7 +2,11 @@ import { api } from "@/shared/api/instance"
 import { BackendRs } from "@/app/types"
 
 
-export async function getAllAds({ page, sortBy, order }: TGetAllAdsRq = { page: 1 }): Promise<BackendRs<TGetAllAdsRs>> {
+export async function getAllAds(
+  page: number = 1,
+  sortBy: "created_at" | "price" | null = null,
+  order: "asc" | "desc" | null = null,
+): Promise<BackendRs<TAd>> {
   const response = await api.get("/ads", {
     params: {
       page,
@@ -14,7 +18,11 @@ export async function getAllAds({ page, sortBy, order }: TGetAllAdsRq = { page: 
   return response.data
 }
 
-export async function getAd({ id, description, images }: TGetAdRq): Promise<BackendRs<TGetAdRs>> {
+export async function getAd(
+  id: number,
+  description: boolean = false,
+  images: boolean = false,
+): Promise<BackendRs<TAd>> {
   const fields: string[] = []
   if (description) {
     fields.push("description")
@@ -32,7 +40,7 @@ export async function getAd({ id, description, images }: TGetAdRq): Promise<Back
   return response.data
 }
 
-export async function createAd(ad: TCreateAdRq): Promise<BackendRs<TCreateAdRs>> {
+export async function createAd(ad: TCreateAdRq): Promise<BackendRs<{ id: number }>> {
   const response = await api.post("/ads", ad)
   return response.data
 }
