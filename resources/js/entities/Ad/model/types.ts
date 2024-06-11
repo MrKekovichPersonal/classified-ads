@@ -1,4 +1,4 @@
-type TAd = {
+export type TAd = {
   id: number
   title: string
   main_photo: string
@@ -7,7 +7,7 @@ type TAd = {
   images?: string[]
 }
 
-type TCreateAdRq = {
+export type TCreateAdRq = {
   title: string
   description: string
   images: string[]
