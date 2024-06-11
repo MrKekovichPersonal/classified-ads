@@ -3,7 +3,7 @@ import { TAd, TCreateAdRq } from "@/entities/Ad/model/types"
 import { ref } from "vue"
 import { createAd, getAd, getAds } from "@/entities/Ad/model/api"
 
-const useAdStore = defineStore({
+export const useAdStore = defineStore({
   id: "ad",
   state: () => ({
     ads: [] as TAd[],
