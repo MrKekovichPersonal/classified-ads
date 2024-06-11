@@ -5,10 +5,6 @@ import { useAdStore } from "@/entities/Ad/model"
 import { onMounted } from "vue"
 
 const store = useAdStore()
-onMounted(() => {
-  store.loadAds()
-})
-
 </script>
 
 <template>
