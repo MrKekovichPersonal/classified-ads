@@ -6,7 +6,7 @@ export async function getAllAds(
   page: number = 1,
   sortBy: "created_at" | "price" | null = null,
   order: "asc" | "desc" | null = null,
-): Promise<BackendRs<TAd>> {
+): Promise<BackendRs<TAd[]>> {
   const response = await api.get("/ads", {
     params: {
       page,
