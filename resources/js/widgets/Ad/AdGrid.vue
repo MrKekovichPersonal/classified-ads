@@ -8,7 +8,7 @@ const store = useAdStore()
 
 <template>
   <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-5  gap-4">
-    <AdCardSkeleton v-if="store.loading || store.error" v-for="n in 12" :key="n"/>
+    <AdCardSkeleton v-if="store.loading || store.error" v-for="n in 10" :key="n"/>
     <AdCard v-else v-for="ad in store.ads" :ad="ad" :key="ad.id"/>
   </div>
 </template>
