@@ -16,10 +16,17 @@ class AdFilter
 
     public function apply(Builder $query): Builder
     {
-        if ($this->request->has('sort_by') && $this->request->has('order')) {
-            $query->orderBy($this->request->input('sort_by'), $this->request->input('order'));
+        $sortBy = $this->request->get('sort_by');
+        $order = $this->request->get('order');
+
+        if ($sortBy !== 'price' && $sortBy !== 'created_at') {
+            $sortBy = 'id';
         }
 
-        return $query;
+        if ($order !== 'asc' && $order !== 'desc') {
+            $order = 'asc';
+        }
+
+        return $query->orderBy($sortBy, $order);
     }
 }
