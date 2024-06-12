@@ -52,28 +52,31 @@ function confirmAction() {
 </script>
 
 <template>
-  <slot/>
-  <div v-if="isVisible" class="modal modal-open">
-    <div class="modal-box">
-      <h3 class="font-bold text-lg">Create Ad</h3>
-      <form @submit.prevent="confirmAction" class="flex flex-col gap-2">
-        <InputField label="Title" v-model="title" required placeholder="Title"/>
-        <TextAreaField label="Description" v-model="description" required placeholder="Description"/>
-        <div>
-          <label class="block text-sm font-medium ">Image URLs (up to 3)</label>
-          <div v-for="(url, index) in imageUrls" :key="index">
-            <div class="my-3 flex flex-col justify-center">
-              <InputField type="url" v-model="imageUrls[index]" placeholder="Image URL"/>
-              <img v-if="url" :src="url" alt="Preview" class="mt-1 max-h-32 object-cover rounded-lg" @error="handleImageError"/>
-            </div>
-          </div>
+  <h3 class="font-bold text-lg">Create Ad</h3>
+  <form @submit.prevent="confirmAction" class="flex flex-col gap-2">
+    <InputField label="Title" v-model="title" required placeholder="Title"/>
+    <TextAreaField label="Description" v-model="description" required placeholder="Description"/>
+
+    <div>
+      <label class="block text-sm font-medium ">Image URLs (up to 3)</label>
+      <div v-for="(url, index) in imageUrls" :key="index">
+        <div class="my-3 flex flex-col justify-center">
+          <InputField type="url" v-model="imageUrls[index]" placeholder="Image URL"/>
+          <img
+            v-if="url"
+            :src="url"
+            alt="Preview"
+            class="mt-1 max-h-32 object-cover rounded-lg"
+            @error="handleImageError"/>
         </div>
-        <InputField label="Price" type="number" step="0.01" v-model="price" required placeholder="Price"/>
-        <div class="modal-action">
-          <button type="button" class="btn" @click="closeModal">Close</button>
-          <button type="submit" class="btn btn-primary">Submit</button>
-        </div>
-      </form>
+      </div>
     </div>
-  </div>
+
+    <InputField label="Price" type="number" step="0.01" v-model="price" required placeholder="Price"/>
+
+    <div class="modal-action">
+      <button type="button" class="btn" @click="closeModal">Close</button>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+  </form>
 </template>

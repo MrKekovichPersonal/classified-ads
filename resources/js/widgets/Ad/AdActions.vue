@@ -1,19 +1,20 @@
 <script setup lang="ts">
-import { blurFilter } from "@/shared/lib/blurFilter"
-import AdModal from "@/widgets/Ad/AdModal.vue"
+import { bgBlurFilter } from "@/shared/lib/bgBlurFilter"
+import AdModal from "@/widgets/Ad/CreateAdModalForm.vue"
 import { computed, onMounted, ref } from "vue"
 import { getAdQueryParams, useAdStore } from "@/entities/Ad"
 import { ArrowIcon, PlusIcon } from "@/shared/ui/icons"
+import { generateUrlQueryParams } from "@/shared/lib/generateUrlQueryParams"
 
 const modalOpen = ref(false)
 const page = ref<number>(1)
 const selectedPage = ref<number>(1)
 const store = useAdStore()
 
-const previousPage = computed(() => page.value === 1
-  ? 1
-  : page.value - 1,
-)
+const sortBy = ref<string>("date")
+const order = ref<string>("asc")
+
+const previousPage = computed(() => page.value <= 1 ? 1 : page.value - 1)
 const nextPage = computed(() => page.value + 1)
 
 onMounted(() => {
@@ -34,27 +35,51 @@ function onModalClose() {
   modalOpen.value = false
 }
 
-function onSelectPage(event: Event) {
-  window.location.href = `?page=${selectedPage.value}`
+function onSelectPage() {
+  window.location.replace(generateUrl(selectedPage.value))
 }
 
+function generateUrl(page: number): string {
+  return "?" + generateUrlQueryParams({ page, sort_by: sortBy.value, order: order.value })
+}
 </script>
 
 <template>
-  <div
-    class="w-full px-8 my-4 sticky bottom-6 z-50 space-y-2">
+  <div class="w-full px-8 my-4 sticky bottom-6 z-50 space-y-2">
+
     <form class="flex justify-center items-center " @submit.prevent="onSelectPage">
-      <h1 class="text-sm">Current page:</h1>
-      <input class="input ml-1 w-10 h-8 border border-neutral rounded-r-none shadow-md shadow-base-300" type="number" v-model="selectedPage" min="1">
-      <button type="submit" class="w-10 h-8 rounded-l-none rounded-r-lg bg-primary text-white rounded">Go</button>
+      <div class="flex items-center space-x-4">
+        <div>
+          <label for="sortBy" class="text-sm">Sort by:</label>
+          <select id="sortBy" v-model="sortBy" class="select select-bordered ml-1 w-24 h-8 shadow-md shadow-base-300">
+            <option value="date">Date</option>
+            <option value="price">Price</option>
+          </select>
+        </div>
+        <div>
+          <label for="order" class="text-sm">Order:</label>
+          <select id="order" v-model="order" class="select select-bordered ml-1 w-24 h-8 shadow-md shadow-base-300">
+            <option value="asc">Asc</option>
+            <option value="desc">Desc</option>
+          </select>
+        </div>
+        <div class="flex items-center">
+          <label for="currentPage" class="text-sm">Current page:</label>
+          <input id="currentPage" class="input ml-1 w-16 border border-neutral shadow-md shadow-base-300" type="number"
+                 v-model="selectedPage" min="1">
+          <button type="submit" class="btn ml-1 rounded-lg bg-primary text-white">Go</button>
+        </div>
+      </div>
     </form>
+
     <div class="grid grid-cols-[50px,1fr,50px] rounded-lg overflow-hidden shadow-md shadow-base-300">
       <a
-        :href="`?page=${previousPage}`"
-        class="flex justify-center items-center hover:bg-base-300 h-12 duration-300"
-        :class="blurFilter('bg-neutral/60')">
+        :href="generateUrl(previousPage)"
+        class="flex justify-center items-center bg-neutral/60 hover:bg-base-300/80 h-12 duration-300"
+        :class="bgBlurFilter()">
         <ArrowIcon class="h-full " direction="left"/>
       </a>
+
       <AdModal
         v-if="!store.loading && !store.error"
         :show="modalOpen"
@@ -62,15 +87,16 @@ function onSelectPage(event: Event) {
         @close="onModalClose">
         <div
           @click="openModal"
-          class="flex justify-center items-center hover:bg-base-300 h-12 border-x-2 border-base-100 duration-300"
-          :class="blurFilter('bg-neutral/60')">
+          class="flex justify-center items-center bg-neutral/60 hover:bg-base-300/80 h-12 border-x-2 border-base-100 duration-300 cursor-pointer"
+          :class="bgBlurFilter('bg-neutral/60')">
           <PlusIcon class="h-full"/>
         </div>
       </AdModal>
+
       <a
-        :href="`?page=${nextPage}`"
-        class="flex justify-center items-center hover:bg-base-300 h-12 duration-300"
-        :class="blurFilter('bg-neutral/60')">
+        :href="generateUrl(nextPage)"
+        class="flex justify-center items-center bg-neutral/60 hover:bg-base-300/80 h-12 duration-300"
+        :class="bgBlurFilter('bg-neutral/60')">
         <ArrowIcon class="h-full"/>
       </a>
     </div>

@@ -1,7 +1,5 @@
 <script setup lang="ts">
 
-import { blurFilter } from "@/shared/lib/blurFilter"
-
 const props = defineProps({
   show: {
     type: Boolean,
@@ -17,7 +15,7 @@ const props = defineProps({
 <template>
   <slot name="trigger"/>
   <dialog :open="props.show" class="modal bg-black/30" :class="props.class">
-    <slot name="content"/>
+    <slot/>
   </dialog>
 </template>
 
