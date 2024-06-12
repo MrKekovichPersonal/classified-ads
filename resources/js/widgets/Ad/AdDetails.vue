@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import Modal from "@/shared/ui/Modal.vue"
 import { useAdStore } from "@/entities/Ad"
-import { computed, onMounted, ref } from "vue"
+import { computed, ref } from "vue"
 import { storeToRefs } from "pinia"
 
 const { selectedAd } = storeToRefs(useAdStore())
@@ -41,7 +41,9 @@ const thumbnail = computed(() => selectedAd.value?.images[thumbnailIndex.value])
         </div>
 
         <div class="absolute top-4 right-4">
-          <button class="bg-base-300 text-white rounded-full w-10 h-10 text-xl inline-flex items-center justify-center" @click="resetSelectedAd">✕</button>
+          <button class="bg-base-300 text-white rounded-full w-10 h-10 text-xl inline-flex items-center justify-center"
+                  @click="resetSelectedAd">✕
+          </button>
         </div>
       </div>
 
