@@ -3,7 +3,6 @@ export const defaultImage = "https://placehold.co/600x400/000/FFF?text=No+Image"
 export function handleImageError(event: Event) {
   try {
     const target = event.target as HTMLImageElement
-    console.log(target.src)
     target.src = defaultImage
   } catch (e) {
     console.error(`Couldn't handle image error for event: ${event}`)
