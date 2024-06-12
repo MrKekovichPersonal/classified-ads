@@ -5,7 +5,6 @@ import { QueryParams, TAd, TCreateAdRq } from "@/entities/Ad/model/types"
 export async function getAds(
   { page, sortBy, order }: QueryParams,
 ): Promise<BackendRs<TAd[]>> {
-  console.log(page, sortBy, order)
   const response = await api.get("/ads", {
     params: {
       page,
