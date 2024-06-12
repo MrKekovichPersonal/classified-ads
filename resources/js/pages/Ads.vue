@@ -1,14 +1,14 @@
 <script setup lang="ts">
 
-import Navbar from "@/shared/ui/Navbar.vue"
-import AdGrid from "@/widgets/Ad/AdGrid.vue"
+import { Navbar } from "@/shared/ui"
+import { AdGrid } from "@/widgets/Ad"
 
 import { useAdStore } from "@/entities/Ad/model"
 import { onMounted } from "vue"
 import { getAdQueryParams } from "@/entities/Ad"
-import Error from "@/shared/ui/Error.vue"
-import AdActions from "@/widgets/Ad/AdActions.vue"
-import AdDetails from "@/widgets/Ad/AdDetails.vue"
+import { Error } from "@/shared/ui"
+import { AdActions } from "@/widgets/Ad"
+import { AdDetails } from "@/widgets/Ad"
 
 const store = useAdStore()
 

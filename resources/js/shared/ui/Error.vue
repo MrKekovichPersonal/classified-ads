@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import ReloadIcon from "@/shared/ui/icons/ReloadIcon.vue"
+import { ReloadIcon } from "@/shared/ui/icons"
 
 defineProps<{
   errorMessage: string

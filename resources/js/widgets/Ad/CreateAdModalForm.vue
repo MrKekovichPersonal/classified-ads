@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import AdForm from "@/features/Ad/AdForm.vue";
+import { AdForm } from "@/features/Ad";
 import { TCreateAdRq, useAdStore } from "@/entities/Ad"
-import Modal from "@/shared/ui/Modal.vue"
+import { Modal } from "@/shared/ui"
 
 const props = defineProps({
   show: {

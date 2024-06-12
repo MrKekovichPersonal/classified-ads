@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Modal from "@/shared/ui/Modal.vue"
+import { Modal } from "@/shared/ui"
 import { useAdStore } from "@/entities/Ad"
 import { computed, ref } from "vue"
 import { storeToRefs } from "pinia"

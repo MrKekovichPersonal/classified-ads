@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, watch } from "vue"
-import InputField from "@/shared/ui/InputField.vue"
-import TextAreaField from "@/shared/ui/TextAreaField.vue"
+import { InputField } from "@/shared/ui"
+import { TextAreaField } from "@/shared/ui"
 import { handleImageError } from "@/shared/lib"
 
 const props = defineProps({

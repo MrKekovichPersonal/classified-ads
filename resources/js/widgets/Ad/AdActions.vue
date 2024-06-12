@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { bgBlurFilter } from "@/shared/lib/bgBlurFilter"
-import AdModal from "@/widgets/Ad/CreateAdModalForm.vue"
+import { CreateAdModalForm } from "@/widgets/Ad"
 import { computed, onMounted, ref } from "vue"
 import { getAdQueryParams, Order, SortBy, useAdStore } from "@/entities/Ad"
 import { ArrowIcon, PlusIcon } from "@/shared/ui/icons"
@@ -87,7 +87,7 @@ onMounted(() => {
         <ArrowIcon class="h-full " direction="left"/>
       </a>
 
-      <AdModal
+      <CreateAdModalForm
         v-if="!store.loading && !store.error"
         :show="modalOpen"
         @confirm="onModalConfirm"
@@ -98,7 +98,7 @@ onMounted(() => {
           :class="bgBlurFilter('bg-neutral/60')">
           <PlusIcon class="h-full"/>
         </div>
-      </AdModal>
+      </CreateAdModalForm>
 
       <a
         :href="generateUrl(nextPage)"
