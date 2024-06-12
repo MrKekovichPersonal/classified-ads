@@ -1,7 +1,7 @@
 export type TAd = {
   id: number
   title: string
-  main_photo: string
+  main_image: string
   price: number
 }
 

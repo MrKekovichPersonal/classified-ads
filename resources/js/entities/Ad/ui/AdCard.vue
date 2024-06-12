@@ -13,7 +13,7 @@ const props = defineProps<{
     <img
       class="h-[200px] border-b border-base-100 object-cover"
       :alt="ad.title"
-      :src="ad.main_photo || defaultImage"
+      :src="ad.main_image || defaultImage"
       @error.prevent="handleImageError"/>
     <div class="p-4 card-body">
       <h6 class="text-2xl font-bold card-title truncate">

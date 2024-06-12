@@ -35,7 +35,7 @@ export const useAdStore = defineStore({
         .then((response) => {
           this.ads.push({
             id: response.data.id,
-            main_photo: ad.images[0],
+            main_image: ad.images[0],
             title: ad.title,
             price: ad.price,
           })
@@ -48,7 +48,7 @@ export const useAdStore = defineStore({
     selectAd(id: number) {
       getAd(id, true, true)
         .then((response) => {
-          this.selectedAd = response.data
+          this.selectedAd = response
         })
         .catch((error) => {
           this.setError(error.message || "Unknown error occurred")
