@@ -1,10 +1,10 @@
 import { api } from "@/shared/api/instance"
-import { BackendRs } from "@/shared/types"
+import { PaginatedRs } from "@/shared/types"
 import { QueryParams, TAd, TCreateAdRq, TDetailedAd } from "@/entities/Ad/model/types"
 
 export async function getAds(
   { page, sortBy, order }: QueryParams,
-): Promise<BackendRs<TAd[]>> {
+): Promise<PaginatedRs<TAd[]>> {
   const response = await api.get("/ads", {
     params: {
       page,
@@ -20,7 +20,7 @@ export async function getAd(
   id: number,
   description: boolean = false,
   images: boolean = false,
-): Promise<BackendRs<TDetailedAd>> {
+): Promise<TDetailedAd> {
   const fields: string[] = []
   if (description) {
     fields.push("description")
@@ -38,7 +38,7 @@ export async function getAd(
   return response.data
 }
 
-export async function createAd(ad: TCreateAdRq): Promise<BackendRs<{ id: number }>> {
+export async function createAd(ad: TCreateAdRq): Promise<{ id: number }> {
   const response = await api.post("/ads", ad)
   return response.data
 }

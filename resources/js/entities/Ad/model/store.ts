@@ -33,12 +33,7 @@ export const useAdStore = defineStore({
     addAd(ad: TCreateAdRq) {
       createAd(ad)
         .then((response) => {
-          this.ads.push({
-            id: response.data.id,
-            main_image: ad.images[0],
-            title: ad.title,
-            price: ad.price,
-          })
+          window.location.reload()
         })
         .catch((error) => {
           this.setError(error.message || "Unknown error occurred")

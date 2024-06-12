@@ -11,6 +11,6 @@ export type PageProps<T extends Record<string, unknown> = Record<string, unknown
   }
 }
 
-export type BackendRs<T> = {
+export type PaginatedRs<T> = {
   data: T
 }
