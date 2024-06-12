@@ -1,24 +1,15 @@
 <script setup lang="ts">
 import { defineEmits, defineProps } from "vue"
 
-const props = defineProps({
-  label: {
-    type: String,
-    required: true,
-  },
-  modelValue: {
-    type: String,
-    required: true,
-  },
-  textareaClass: {
-    type: String,
-    default: "textarea textarea-bordered w-full",
-  },
-  required: {
-    type: Boolean,
-    default: false,
-  },
-})
+const props = defineProps<{
+  label?: string
+  labelClass?: string
+  modelValue: any,
+  rows?: number
+  placeholder?: string
+  textareaClass?: string
+  required?: boolean
+}>()
 
 const emits = defineEmits<{
   (e: "update:modelValue", value: string | null): void;
@@ -30,9 +21,15 @@ function updateValue(target: HTMLTextAreaElement) {
 </script>
 
 <template>
-  <div class="mb-4">
-    <label class="block text-sm font-medium mb-1">{{ label }}</label>
-    <textarea :value="modelValue" :class="textareaClass" :required="required"
-              @input="updateValue($event.target as HTMLTextAreaElement)"></textarea>
+  <div>
+    <label class="block text-sm font-medium mb-1" :class="labelClass">{{ label }}</label>
+    <textarea
+      :value="modelValue"
+      class="textarea textarea-bordered w-full"
+      :class="textareaClass"
+      :placeholder="placeholder"
+      :required="required"
+      :rows="rows"
+      @input="updateValue($event.target as HTMLTextAreaElement)"/>
   </div>
 </template>
