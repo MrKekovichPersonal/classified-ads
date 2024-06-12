@@ -3,8 +3,11 @@ export type TAd = {
   title: string
   main_photo: string
   price: number
+}
+
+export type TDetailedAd = TAd & {
   description?: string
-  images?: string[]
+  images: string[]
 }
 
 export type TCreateAdRq = {

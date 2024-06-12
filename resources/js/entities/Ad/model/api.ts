@@ -1,6 +1,6 @@
 import { api } from "@/shared/api/instance"
 import { BackendRs } from "@/shared/types"
-import { QueryParams, TAd, TCreateAdRq } from "@/entities/Ad/model/types"
+import { QueryParams, TAd, TCreateAdRq, TDetailedAd } from "@/entities/Ad/model/types"
 
 export async function getAds(
   { page, sortBy, order }: QueryParams,
@@ -20,7 +20,7 @@ export async function getAd(
   id: number,
   description: boolean = false,
   images: boolean = false,
-): Promise<BackendRs<TAd>> {
+): Promise<BackendRs<TDetailedAd>> {
   const fields: string[] = []
   if (description) {
     fields.push("description")
