@@ -2,7 +2,7 @@
 import { bgBlurFilter } from "@/shared/lib/bgBlurFilter"
 import AdModal from "@/widgets/Ad/CreateAdModalForm.vue"
 import { computed, onMounted, ref } from "vue"
-import { getAdQueryParams, useAdStore } from "@/entities/Ad"
+import { getAdQueryParams, Order, SortBy, useAdStore } from "@/entities/Ad"
 import { ArrowIcon, PlusIcon } from "@/shared/ui/icons"
 import { generateUrlQueryParams } from "@/shared/lib/generateUrlQueryParams"
 
@@ -11,8 +11,8 @@ const page = ref<number>(1)
 const selectedPage = ref<number>(1)
 const store = useAdStore()
 
-const sortBy = ref<string>("date")
-const order = ref<string>("asc")
+const sortBy = ref<SortBy>("date")
+const order = ref<Order>("asc")
 
 const previousPage = computed(() => page.value <= 1 ? 1 : page.value - 1)
 const nextPage = computed(() => page.value + 1)
@@ -42,6 +42,12 @@ function onSelectPage() {
 function generateUrl(page: number): string {
   return "?" + generateUrlQueryParams({ page, sort_by: sortBy.value, order: order.value })
 }
+
+onMounted(() => {
+  const urlParams = getAdQueryParams()
+  sortBy.value = urlParams.sortBy
+  order.value = urlParams.order
+})
 </script>
 
 <template>
@@ -52,15 +58,15 @@ function generateUrl(page: number): string {
         <div>
           <label for="sortBy" class="text-sm">Sort by:</label>
           <select id="sortBy" v-model="sortBy" class="select select-bordered ml-1 w-24 h-8 shadow-md shadow-base-300">
-            <option value="date">Date</option>
-            <option value="price">Price</option>
+            <option :selected="sortBy === 'date'" value="date">Date</option>
+            <option :selected="sortBy === 'price'" value="price">Price</option>
           </select>
         </div>
         <div>
           <label for="order" class="text-sm">Order:</label>
           <select id="order" v-model="order" class="select select-bordered ml-1 w-24 h-8 shadow-md shadow-base-300">
-            <option value="asc">Asc</option>
-            <option value="desc">Desc</option>
+            <option :selected="order === 'asc'" value="asc">Asc</option>
+            <option :selected="order === 'desc'" value="desc">Desc</option>
           </select>
         </div>
         <div class="flex items-center">
