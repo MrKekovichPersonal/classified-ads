@@ -1,12 +1,20 @@
 <script setup lang="ts">
 import { TAd } from "@/entities/Ad/model"
+import { defaultImage, handleImageError } from "@/shared/lib"
 
-const { ad } = defineProps<{ ad: TAd }>()
+const props = defineProps<{
+  ad: TAd
+}>()
 </script>
 
 <template>
-  <div class="card overflow-hidden border border-neutral rounded-lg bg-neutral shadow-md shadow-base-300 cursor-pointer hover:bg-base-300 duration-300">
-    <img :src="ad.main_photo" class="h-[200px] border-b border-base-100 object-cover" :alt="ad.title"/>
+  <div
+    class="card overflow-hidden border border-neutral rounded-lg bg-neutral shadow-md shadow-base-300 cursor-pointer hover:bg-base-300 duration-300">
+    <img
+      class="h-[200px] border-b border-base-100 object-cover"
+      :alt="ad.title"
+      :src="ad.main_photo || defaultImage"
+      @error.prevent="handleImageError"/>
     <div class="p-4 card-body">
       <h6 class="text-2xl font-bold card-title truncate">
         {{
