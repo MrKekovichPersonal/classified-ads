@@ -11,7 +11,7 @@ const page = ref<number>(1)
 const selectedPage = ref<number>(1)
 const store = useAdStore()
 
-const sortBy = ref<SortBy>("date")
+const sortBy = ref<SortBy>("created_at")
 const order = ref<Order>("asc")
 
 const previousPage = computed(() => page.value <= 1 ? 1 : page.value - 1)
@@ -40,13 +40,14 @@ function onSelectPage() {
 }
 
 function generateUrl(page: number): string {
-  return "?" + generateUrlQueryParams({ page, sort_by: sortBy.value, order: order.value })
+  return generateUrlQueryParams({ page, sort_by: sortBy.value, order: order.value })
 }
 
 onMounted(() => {
   const urlParams = getAdQueryParams()
   sortBy.value = urlParams.sortBy
   order.value = urlParams.order
+  console.log(urlParams)
 })
 </script>
 
@@ -57,8 +58,8 @@ onMounted(() => {
       <div class="flex items-center space-x-4">
         <div>
           <label for="sortBy" class="text-sm">Sort by:</label>
-          <select id="sortBy" v-model="sortBy" class="select select-bordered ml-1 w-24 h-8 shadow-md shadow-base-300">
-            <option :selected="sortBy === 'date'" value="date">Date</option>
+          <select id="sortBy" v-model="sortBy" class="select select-bordered ml-1 w-32 h-8 shadow-md shadow-base-300">
+            <option :selected="sortBy === 'created_at'" value="created_at">Created At</option>
             <option :selected="sortBy === 'price'" value="price">Price</option>
           </select>
         </div>

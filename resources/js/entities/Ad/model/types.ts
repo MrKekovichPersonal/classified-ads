@@ -17,10 +17,10 @@ export type TCreateAdRq = {
   price: number
 }
 
-export type SortBy = "created_at" | "price" | null | string
-export type Order = "asc" | "desc" | null | string
+export type SortBy = "created_at" | "price" | null
+export type Order = "asc" | "desc" | null
 export type QueryParams = {
-  page: number | null
+  page: number
   sortBy: SortBy
   order: Order
 }

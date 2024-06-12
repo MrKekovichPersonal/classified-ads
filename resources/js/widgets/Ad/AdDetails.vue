@@ -10,9 +10,6 @@ const { resetSelectedAd } = useAdStore()
 const thumbnailIndex = ref(0)
 const thumbnail = computed(() => selectedAd.value?.images[thumbnailIndex.value])
 
-onMounted(() => {
-  console.log(selectedAd.value)
-})
 </script>
 
 <template>
